@@ -33,7 +33,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
         }
         
         header {
@@ -53,10 +53,11 @@
             justify-content: center;
             list-style: none;
             padding: 1rem 0;
+            flex-wrap: wrap;
         }
         
         nav ul li {
-            margin: 0 1rem;
+            margin: 0.5rem;
         }
         
         nav ul li a {
@@ -65,6 +66,7 @@
             font-size: 0.9rem;
             transition: color 0.3s ease;
             position: relative;
+            padding: 0.5rem;
         }
         
         nav ul li a::after {
@@ -72,7 +74,7 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             background-color: var(--secondary-color);
             transition: width 0.3s ease;
@@ -83,34 +85,35 @@
         }
         
         #hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             background: linear-gradient(rgba(26, 47, 78, 0.8), rgba(26, 47, 78, 0.8)), url('https://source.unsplash.com/random/1920x1080/?technology') no-repeat center center/cover;
-            background-attachment: fixed;
+            background-attachment: scroll;
+            padding: 2rem 0;
         }
         
         #hero .hero-content {
-            max-width: 800px;
+            max-width: 100%;
         }
         
         #hero h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             color: var(--heading-color);
             margin-bottom: 1rem;
         }
         
         #hero p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin-bottom: 1.5rem;
         }
         
         .section {
-            padding: 5rem 0;
+            padding: 3rem 0;
         }
         
         h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--heading-color);
             margin-bottom: 2rem;
             text-align: center;
@@ -118,19 +121,19 @@
         
         #skills {
             background-color: rgba(255, 255, 255, 0.05);
-            padding: 4rem 0;
+            padding: 3rem 0;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
         }
 
         .skill-item {
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -142,20 +145,20 @@
 
         .skill-item h3 {
             color: var(--secondary-color);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
             color: var(--heading-color);
         }
         
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
         
         .project-item {
@@ -176,11 +179,13 @@
         .project-item h3 {
             color: var(--secondary-color);
             margin-bottom: 0.5rem;
+            font-size: 1.2rem;
         }
         
         .project-item p {
             margin-bottom: 1rem;
             flex-grow: 1;
+            font-size: 0.9rem;
         }
         
         .project-item .btn-container {
@@ -223,6 +228,11 @@
             margin-top: 2rem;
         }
         
+        #github-widget img {
+            max-width: 100%;
+            height: auto;
+        }
+        
         footer {
             text-align: center;
             padding: 2rem 0;
@@ -250,16 +260,72 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
             #hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             
             #hero p {
-                font-size: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
             
             .projects-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .social-links a {
+                font-size: 1.2rem;
+                margin-right: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            #hero p {
+                font-size: 0.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+            
+            .skill-item h3 {
+                font-size: 0.9rem;
+            }
+            
+            .skill-icon {
+                font-size: 1.5rem;
+            }
+            
+            .project-item h3 {
+                font-size: 1.1rem;
+            }
+            
+            .project-item p {
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
             }
         }
     </style>
@@ -340,7 +406,7 @@
 
         <section id="projects" class="section">
             <div class="container">
-                <h2 class="fade-in">Projects</h2>
+                <h2 class="fade-in">Featured Projects</h2>
                 <div class="projects-grid">
                     <div class="project-item fade-in">
                         <h3>My Home Lab</h3>
@@ -378,7 +444,7 @@
 
         <section id="github" class="section">
             <div class="container">
-                <h2  class="fade-in">GitHub Activity</h2>
+                <h2 class="fade-in">GitHub Activity</h2>
                 <div id="github-widget" class="fade-in">
                     <!-- GitHub Calendar -->
                     <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
