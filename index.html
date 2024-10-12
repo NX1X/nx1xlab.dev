@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eden / NX1X - Personal Website</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2a4d69;
+            --secondary-color: #4bc0d9;
+            --text-color: #e7eff6;
+            --heading-color: #ffffff;
+            --background-color: #163957;
+            --accent-color: #63ace5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        header {
+            background-color: rgba(26, 47, 78, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(26, 47, 78, 0.98);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: var(--heading-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 47, 78, 0.8), rgba(26, 47, 78, 0.8)), url('https://source.unsplash.com/random/1920x1080/?technology') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+        
+        #hero .hero-content {
+            max-width: 800px;
+        }
+        
+        #hero h1 {
+            font-size: 3.5rem;
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+        }
+        
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: var(--heading-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        #skills {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 4rem 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-item h3 {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--heading-color);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-item p {
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .project-item .btn-container {
+            margin-top: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--background-color);
+        }
+        
+        .social-links {
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--heading-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        #github-widget {
+            margin-top: 2rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        #contact {
+            text-align: center;
+        }
+        
+        #contact .email {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            #hero p {
+                font-size: 1rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#github">GitHub</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home"></section>
+            <section id="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="fade-in">Hi, I'm Eden and my online nickname is NX1X</h1>
+                        <p class="fade-in">System Administrator & DevOps Enthusiast | Security-Minded Professional | AI & ML Fan</p>
+                        <p class="fade-in">I'm looking to join an organization and build something remarkable with a team of passionate colleagues. As a self-learner, I will be eager to find solutions to challenges and problems that will pop up along the way.</p>
+                        <p class="fade-in">My motto: As a people's person, I've volunteered my whole life for various topics, including tech and life-saving activities. I believe in helping each other and cooperation.</p>
+                        <p class="fade-in">If it sounds like you'll enjoy working together, please contact me on one of the following platforms:</p>
+                        <div class="social-links fade-in">
+                            <a href="https://www.linkedin.com/in/edenporat" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                            <a href="mailto:contact@nx1xlab.dev"><i class="fas fa-envelope"></i></a>
+                            <a href="https://twitter.com/NX1XLab" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                            <a href="https://github.com/nx1x" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                            <a href="https://nx1xlab.dev" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="fade-in">Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-item fade-in">
+                        <i class="fas fa-server skill-icon"></i>
+                        <h3>System Administration</h3>
+                    </div>
+                    <div class="skill-item fade-in">
+                        <i class="fas fa-cloud skill-icon"></i>
+                        <h3>Cloud Computing</h3>
+                    </div>
+                    <div class="skill-item fade-in">
+                        <i class="fas fa-code-branch skill-icon"></i>
+                        <h3>Version Control</h3>
+                    </div>
+                    <div class="skill-item fade-in">
+                        <i class="fas fa-sync-alt skill-icon"></i>
+                        <h3>CI/CD</h3>
+                    </div>
+                    <div class="skill-item fade-in">
+                        <i class="fas fa-network-wired skill-icon"></i>
+                        <h3>Networking</h3>
+                    </div>
+                    <div class="skill-item fade-in">
+                        <i class="fas fa-shield-alt skill-icon"></i>
+                        <h3>Security</h3>
+                    </div>
+                    <div class="skill-item fade-in">
+                        <i class="fas fa-tools skill-icon"></i>
+                        <h3>DevOps Tools</h3>
+                    </div>
+                    <div class="skill-item fade-in">
+                        <i class="fas fa-dharmachakra skill-icon"></i>
+                        <h3>Kubernetes</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="fade-in">Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-item fade-in">
+                        <h3>My Home Lab</h3>
+                        <p>Testing and learning various technologies of system administration in a home lab environment</p>
+                        <a href="https://github.com/NX1X/My-Home-Lab" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                    <div class="project-item fade-in">
+                        <h3>Deployable app on K8s - React, Java & MySQL</h3>
+                        <p>An app I deployed over K8s with ArgoCD on my final project in the DevOps course.</p>
+                        <a href="https://github.com/NX1X/final-project-react-java0mysql" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                    <div class="project-item fade-in">
+                        <h3>Terraform AWS EKS</h3>
+                        <p>A Terraform module that builds a complete EKS cluster. More details in README.md file and in Terraform Registry.</p>
+                        <a href="https://github.com/NX1X/terraform-aws-eks" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                    <div class="project-item fade-in">
+                        <h3>Terraform Linode LKS</h3>
+                        <p>A Terraform module that builds a complete Linode LKS cluster. More details in README.md file and in Terraform Registry. Disclaimer: This module is still in development.</p>
+                        <a href="https://github.com/NX1X/terraform-linode-lks" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                    <div class="project-item fade-in">
+                        <h3>VSShare</h3>
+                        <p>Share your best VSCode extension with your colleagues by using VSShare.</p>
+                        <a href="https://github.com/NX1X/VSShare" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                    <div class="project-item fade-in">
+                        <h3>Final project static website for DevOps course</h3>
+                        <p>Our webpage portal shows some of our work</p>
+                        <a href="https://github.com/NX1X/final-project-static-website" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="github" class="section">
+            <div class="container">
+                <h2  class="fade-in">GitHub Activity</h2>
+                <div id="github-widget" class="fade-in">
+                    <!-- GitHub Calendar -->
+                    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+                    <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
+                    <div class="calendar">
+                        <!-- Loading stuff -->
+                        Loading GitHub data...
+                    </div>
+                    <script>
+                        GitHubCalendar(".calendar", "nx1x", { responsive: true });
+                    </script>
+
+                    <!-- GitHub Readme Stats -->
+                    <img src="https://github-readme-stats.vercel.app/api?username=nx1x&show_icons=true&theme=dark" alt="GitHub Stats" />
+
+                    <!-- GitHub Language Stats -->
+                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nx1x&layout=compact&theme=dark" alt="Top Languages" />
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="fade-in">Get in Touch</h2>
+                <p class="email fade-in">Email: <a href="mailto:contact@nx1xlab.dev">contact@nx1xlab.dev</a></p>
+                <div class="social-links fade-in">
+                    <a href="https://www.linkedin.com/in/edenporat" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:contact@nx1xlab.dev"><i class="fas fa-envelope"></i></a>
+                    <a href="https://twitter.com/NX1XLab" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/nx1x" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    <a href="https://nx1xlab.dev" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 NX1X. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const faders = document.querySelectorAll('.fade-in');
+        const header = document.querySelector('header');
+        
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appear');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
